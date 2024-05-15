@@ -1,6 +1,62 @@
+import random
 from tkinter import *
 
 names = []
+global questions_answers
+asked = []
+score = 0
+
+
+def randomiser():
+    global qnum
+    qnum = random.randint(1, 10)
+    if qnum not in asked:
+        asked.append(qnum)
+    elif qnum in asked:
+        randomiser()
+
+
+randomiser()
+
+questions_answers = {
+    1: [
+        "What is the capital of France?", 'Berlin', 'Paris', 'London',
+        'Madrid', 'Paris', 2
+    ],
+    2: ["What are the two most important subjects in school?",
+        'Maths and English', "Art and Maths", \
+        'English and Science', 'Maths and Science', \
+        'Maths and English', 1],
+    3: [
+        "Who wrote the lord of the rings?", 'J.K. Rowling', 'Stephen King',
+        "J.R.R Tolkien", 'George Orwell', 'J.R.R Tolkien', 3
+    ],
+    4: [
+        "Where is mount Everest located?", 'India', 'Nepal', 'China', 'Bhutan',
+        "Nepal", 2
+    ],
+    5: [
+        "Who was the 40th president of the USA?", "Barack Obama",
+        "Donald Trump", "Bill Clinton", "George Bush", "Barack Obama", 1
+    ],
+    6: ["When did WW2 end?", "1918", "1939", "1945", "1914", "1945", 3],
+    7: [
+        "How old is the universe?", "17.3 billion years", "13.8 billion years",
+        "12.4 billion years", "19.6 billion years", "13.8 billion years", 2
+    ],
+    8: [
+        "What was the largest dinosaur to roam the earth?", 'Titanosaurus',
+        'Argentinosaurus', 'Giganotosaurus', 'Spinosaurus', 'Titanosaurus', 1
+    ],
+    9: [
+        "Who invented the lightbulb?", 'Albert Einstein', 'Nikola Tesla',
+        'Isaac Newton', 'Thomas Edison', 'Thomas Edison', 4
+    ],
+    10: [
+        "Which Country is often not found on the world map?", 'Canada',
+        'Australia', 'New Zealand', 'South Africa', 'New Zealand', 3
+    ]
+}
 
 
 class QuizStarter:
