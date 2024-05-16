@@ -2,23 +2,23 @@ import random
 from tkinter import *
 
 names = []
-global questions_answers
+global answers
 asked = []
 score = 0
 
 
 def randomiser():
-    global qnum
-    qnum = random.randint(1, 10)
-    if qnum not in asked:
-        asked.append(qnum)
-    elif qnum in asked:
+    global questionNumber
+    questionNumber = random.randint(1, 10)
+    if questionNumber not in asked:
+        asked.append(questionNumber)
+    elif questionNumber in asked:
         randomiser()
 
 
 randomiser()
 
-questions_answers = {
+answers = {
     1: [
         "What is the capital of France?", 'Berlin', 'Paris', 'London',
         'Madrid', 'Paris', 2
@@ -106,9 +106,9 @@ class QuizStarter:
 
 
 if __name__ == "__main__":
-    root = Tk()
-    root.title(
+    quizRoot = Tk()
+    quizRoot.title(
         "10 question General Knowledge Quiz - Liam Fraser, assessment standard 2.7"
     )
-    quiz_instance = QuizStarter(root)
-    root.mainloop()
+    quiz_instance = QuizStarter(quizRoot)
+    quizRoot.mainloop()
