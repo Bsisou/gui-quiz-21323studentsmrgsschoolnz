@@ -174,17 +174,18 @@ class Questions_Menu:
         self.radiobutton3.config(text=answer_list[qnum][3])
         self.radiobutton4.config(text=answer_list[qnum][4])
 
+
     #This is the code that randomises the chosen questions
-    def randomiser():
-        global qnum
-        qnum = random.randint(1, 50)
-        if qnum not in asked:
-            asked.append(qnum)
-        elif qnum in asked:
-            randomiser()
+def randomiser():
+    global qnum
+    qnum = random.randint(1, 50)
+    if qnum not in asked:
+        asked.append(qnum)
+    elif qnum in asked:
+        randomiser()
 
-    randomiser()
 
+randomiser()
 
 #Dictionary that holds all possible questions and answers
 answer_list = {
@@ -261,7 +262,7 @@ answer_list = {
         "John Adams", "George Washington", 2
     ],
     19: [
-        "William Buckland discovered the first Dinosaur Fossil in the world. What was it?",
+        "William Buckland discovered the first Dinosaur \n Fossil in the world. What was it?",
         "T-Rex", "Triceratops", "Stegosaurus", "Megalosaurus", "Megalosaurus",
         4
     ],
@@ -275,7 +276,7 @@ answer_list = {
         "The Burj Khalifa", 1
     ],
     22: [
-        "A manhole cover was launched into space in 1957 after a nuclear bomb was tested underground. How fast did this manhole cover go?",
+        "A manhole cover was launched into space in 1957 after a nuclear bomb was tested underground. \n How fast did this manhole cover go?",
         "70,000mph", "100,000mph", "80,000mph", "130,000mph", "130,000mph", 4
     ],
     23: [
@@ -300,7 +301,7 @@ answer_list = {
         "It has the largest rings in the observable universe", 2
     ],
     27:
-    ["When was the black plague?", "1642", "1642", "1642", "1642", "1642", 1],
+    ["When was the black plague?", "1642", "1378", "1794", "1421", "1642", 1],
     28: [
         "1918 was the year that...", "The first iPhone came out",
         "The first car was invented", "The dinosaur fossil was found",
@@ -411,4 +412,5 @@ if __name__ == "__main__":
     root.title("Liam Fraser CSC 2.7 assessment")
     root.resizable(height=None, width=None)
     main_menu = Main_Menu(root)
+
     root.mainloop()
