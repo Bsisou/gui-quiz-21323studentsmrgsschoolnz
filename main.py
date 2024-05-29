@@ -63,7 +63,7 @@ class Questions_Menu:
 
         self.questlabel = Label(self.main_frame,
                                 text=answer_list[qnum][0],
-                                font=("Tw Cen MT", "18", "bold"),
+                                font=("Tw Cen MT", "15", "bold"),
                                 bg=background_colour)
         self.questlabel.grid(row=1, padx=10, pady=10, columnspan=2)
 
@@ -378,8 +378,7 @@ answer_list = {
     45: [
         "If you stare directly at the sun, what will happen?",
         "You will explode", "Nothing", "You will go blind",
-        "You will magically write the whole declaration of independence",
-        "You will go blind", 3
+        "Spontaneous Combustion", "You will go blind", 3
     ],
     46: [
         "What does 'GOAT' stand for in internet slang?",
@@ -387,7 +386,7 @@ answer_list = {
         "Good old Apple Tooth", "Got Owens All Time", "Greatest Of All Time", 1
     ],
     47: [
-        "Water, or H20 in scientific terms, is a liquid that humans require to survive. What two elements are in it?",
+        "Water, or H20 in scientific terms, is a liquid that humans require to survive.\n What two elements are in it?",
         "Hydrogen and Oxygen", "Hydrogen and Carbon Dioxide",
         "Hydrogen and Carbon", "Oxygen and Carbon Dioxide",
         "Hydrogen and Oxygen", 1
