@@ -15,7 +15,7 @@ class Main_Menu:
         background_color = "DarkGreen"
         self.main_frame = Frame(parent,
                                 bg=background_color,
-                                padx=100,
+                                padx=200,
                                 pady=100)
         self.main_frame.grid()
 
@@ -61,10 +61,14 @@ class Questions_Menu:
                                 pady=100)
         self.main_frame.grid()
 
-        self.questlabel = Label(self.main_frame,
-                                text=answer_list[qnum][0],
-                                font=("Tw Cen MT", "15", "bold"),
-                                bg=background_colour)
+        self.questlabel = Label(
+            self.main_frame,
+            width=50,
+            wraplength=500,
+            text=answer_list[qnum][0],
+            font=("Tw Cen MT", "15", "bold"),
+            bg=background_colour,
+        )
         self.questlabel.grid(row=1, padx=10, pady=10, columnspan=2)
 
         self.variable1 = IntVar()
@@ -79,7 +83,7 @@ class Questions_Menu:
                                         variable=self.variable1,
                                         bg=background_colour,
                                         highlightthickness=0)
-        self.radiobutton1.grid(row=2, column=0, sticky=W)
+        self.radiobutton1.grid(row=2, column=0, sticky=W + E)
 
         #Question Button 2
         self.radiobutton2 = Radiobutton(self.main_frame,
@@ -91,7 +95,7 @@ class Questions_Menu:
                                         variable=self.variable1,
                                         bg=background_colour,
                                         highlightthickness=0)
-        self.radiobutton2.grid(row=2, column=1, sticky=W)
+        self.radiobutton2.grid(row=2, column=1, sticky=W + E)
 
         #Question Button 3
         self.radiobutton3 = Radiobutton(self.main_frame,
@@ -103,7 +107,7 @@ class Questions_Menu:
                                         variable=self.variable1,
                                         bg=background_colour,
                                         highlightthickness=0)
-        self.radiobutton3.grid(row=3, column=0, sticky=W)
+        self.radiobutton3.grid(row=3, column=0, sticky=W + E)
 
         #Question button 4
         self.radiobutton4 = Radiobutton(self.main_frame,
@@ -115,7 +119,7 @@ class Questions_Menu:
                                         variable=self.variable1,
                                         bg=background_colour,
                                         highlightthickness=0)
-        self.radiobutton4.grid(row=3, column=1, sticky=W)
+        self.radiobutton4.grid(row=3, column=1, sticky=W + E)
 
         #Confirm Button
         self.confirm_button = Button(self.main_frame,
@@ -276,7 +280,7 @@ answer_list = {
         "The Burj Khalifa", 1
     ],
     22: [
-        "A manhole cover was launched into space in 1957 after a nuclear bomb was tested underground. \n How fast did this manhole cover go?",
+        "A manhole cover was launched into space in 1957 after a nuclear bomb was\ntested underground. How fast did this manhole cover go?",
         "70,000mph", "100,000mph", "80,000mph", "130,000mph", "130,000mph", 4
     ],
     23: [
@@ -408,8 +412,9 @@ answer_list = {
 #The mainloop that creates the window for all code to run
 if __name__ == "__main__":
     root = Tk()
+    #root.geometry("600x400")
+    #root.resizable(width=False, height=False)
     root.title("Liam Fraser CSC 2.7 assessment")
-    root.resizable(height=None, width=None)
     main_menu = Main_Menu(root)
-
+    scroll_bar = Scrollbar(root)
     root.mainloop()
