@@ -22,7 +22,7 @@ class Main_Menu:
                                 pady=100)
         self.main_frame.grid()
         self.title = Label(self.main_frame,
-                           text="Untitled General Knowledge Quiz",
+                           text="Generic General Knowledge Quiz",
                            font=("Tw Cen MT", "18", "bold"),
                            bg=background_color)
         self.title.grid(row=0)
@@ -211,6 +211,15 @@ class Quit:
                            font=("Helvetica", "12"),
                            bg=background)
         time_label.grid(row=1)
+        # Score label
+        if len(asked) == 10:
+            score_label = Label(self.quit_frame,
+                                text=f"Final score: {score}",
+                                font=("Helvetica", "12"),
+                                bg=background)
+            score_label.grid(row=2)
+            with open("high_scores.txt", "a") as file:
+                file.write(f"{names_list[-1]} - {score}\n")
         # Quit button
         quit_button = Button(self.quit_frame,
                              text='Quit',
@@ -318,7 +327,7 @@ answer_list = {
         "John Adams", "George Washington", 2
     ],
     19: [
-        "William Buckland discovered the first Dinosaur \n Fossil in the world. What was it?",
+        "William Buckland discovered the first Dinosaur Fossil in the world. What was it?",
         "T-Rex", "Triceratops", "Stegosaurus", "Megalosaurus", "Megalosaurus",
         4
     ],
@@ -332,7 +341,7 @@ answer_list = {
         "The Burj Khalifa", 1
     ],
     22: [
-        "A manhole cover was launched into space in 1957 after a nuclear bomb was\ntested underground. How fast did this manhole cover go?",
+        "A manhole cover was launched into space in 1957 after a nuclear bomb was tested underground. How fast did this manhole cover go?",
         "70,000mph", "100,000mph", "80,000mph", "130,000mph", "130,000mph", 4
     ],
     23: [
@@ -442,7 +451,7 @@ answer_list = {
         "Good old Apple Tooth", "Got Owens All Time", "Greatest Of All Time", 1
     ],
     47: [
-        "Water, or H20 in scientific terms, is a liquid that humans require to survive.\n What two elements are in it?",
+        "Water, or H20 in scientific terms, is a liquid that humans require to survive. What two elements are in it?",
         "Hydrogen and Oxygen", "Hydrogen and Carbon Dioxide",
         "Hydrogen and Carbon", "Oxygen and Carbon Dioxide",
         "Hydrogen and Oxygen", 1
