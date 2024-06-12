@@ -1,15 +1,19 @@
-from tkinter import *
-from time import time, strftime
 import random
-names_list = []  # saves name to console
-global answer_list  # Makes answer_list global (what does that do)
-asked = []  # I have no idea what this does
-score = 0  # sets score to 0
+from time import strftime, time, gmtime
+from tkinter import *
+
+# Global variables
+names_list = []  # List to store names
+answer_list = []  # List to store answers (assuming you'll populate it)
+asked = []  # List to keep track of asked questions
+score = 0  # Score counter
 start_time = 0  # Variable to store the start time of the stopwatch
 stopwatch_label = None  # Global variable for the stopwatch label
+
+
 # Create the main window
 class Main_Menu:
-    #Defines the appearance of the main menu
+    # Defines the appearance of the main menu
     def __init__(self, parent):
         background_color = "DarkGreen"
         self.main_frame = Frame(parent,
@@ -34,21 +38,23 @@ class Main_Menu:
                                       bg="Turquoise",
                                       command=self.next_window)
         self.continue_button.grid(row=3, pady=20)
-    #This is the code that opens the next window
+
+    # This is the code that opens the next window
     def next_window(self):
         global start_time
         name = self.name_bar.get(
-        )  #Saves the name the user input into the name bar
-        names_list.append(
-            name)  #Adds the name to the list, assuming there is a list
-        print(names_list)  #Prints the name to the console???
-        self.main_frame.destroy()  #Destroys the main menu
+        )  # Saves the name the user input into the name bar
+        names_list.append(name)  # Adds the name to the list
+        print(names_list)  # Prints the name to the console
+        self.main_frame.destroy()  # Destroys the main menu
         start_time = time(
         )  # Start the stopwatch when the main menu is destroyed
-        Questions_Menu(root)  #Opens the Questions Menu Window
-#Create the quiz window
+        Questions_Menu(root)  # Opens the Questions Menu Window
+
+
+# Create the quiz window
 class Questions_Menu:
-    #Defines the appearance of the quiz window
+    # Defines the appearance of the quiz window
     def __init__(self, parent):
         global stopwatch_label
         background_colour = "DarkGreen"
@@ -57,18 +63,16 @@ class Questions_Menu:
                                 padx=100,
                                 pady=100)
         self.main_frame.grid()
-        self.questlabel = Label(
-            self.main_frame,
-            width=50,
-            wraplength=500,
-            text=answer_list[qnum][0],
-            font=("Tw Cen MT", "15", "bold"),
-            bg=background_colour,
-        )
+        self.questlabel = Label(self.main_frame,
+                                width=50,
+                                wraplength=500,
+                                text=answer_list[qnum][0],
+                                font=("Tw Cen MT", "15", "bold"),
+                                bg=background_colour)
         self.questlabel.grid(row=1, padx=10, pady=10, columnspan=2)
-        self.variable1 = IntVar(
-        )  #what is this and why is it here- what does it even do? It's not a radiobutton or a confirm button, it's just HERE.
-        #Question Button 1
+        self.variable1 = IntVar()  # Stores the user's answer choice
+
+        # Question Button 1
         self.radiobutton1 = Radiobutton(self.main_frame,
                                         text=answer_list[qnum][1],
                                         font=("Helvetica", "12"),
@@ -79,7 +83,7 @@ class Questions_Menu:
                                         bg=background_colour,
                                         highlightthickness=0)
         self.radiobutton1.grid(row=2, column=0, sticky=W + E)
-        #Question Button 2
+        # Question Button 2
         self.radiobutton2 = Radiobutton(self.main_frame,
                                         text=answer_list[qnum][2],
                                         font=("Helvetica", "12"),
@@ -90,7 +94,7 @@ class Questions_Menu:
                                         bg=background_colour,
                                         highlightthickness=0)
         self.radiobutton2.grid(row=2, column=1, sticky=W + E)
-        #Question Button 3
+        # Question Button 3
         self.radiobutton3 = Radiobutton(self.main_frame,
                                         text=answer_list[qnum][3],
                                         font=("Helvetica", "12"),
@@ -101,7 +105,7 @@ class Questions_Menu:
                                         bg=background_colour,
                                         highlightthickness=0)
         self.radiobutton3.grid(row=3, column=0, sticky=W + E)
-        #Question button 4
+        # Question Button 4
         self.radiobutton4 = Radiobutton(self.main_frame,
                                         text=answer_list[qnum][4],
                                         font=("Helvetica", "12"),
@@ -112,14 +116,14 @@ class Questions_Menu:
                                         bg=background_colour,
                                         highlightthickness=0)
         self.radiobutton4.grid(row=3, column=1, sticky=W + E)
-        #Confirm Button
+        # Confirm Button
         self.confirm_button = Button(self.main_frame,
                                      text="Confirm",
                                      bg="White",
                                      font=("Helvetica", "12"),
                                      command=self.quiz_progress)
         self.confirm_button.grid(row=7, padx=5, pady=5, columnspan=2)
-        #Total Score
+        # Total Score
         self.total_score = Label(self.main_frame,
                                  text="TOTAL SCORE",
                                  font=("Helvetica", "12"),
@@ -130,13 +134,15 @@ class Questions_Menu:
                                 text="00:00:00",
                                 font=("Helvetica", "12"),
                                 bg=background_colour)
-        stopwatch_label.grid(row=9, padx=10, pady=1, columnspan=2)        
-        update_stopwatch(self)  # Start updating the stopwatch label
+        stopwatch_label.grid(row=9, padx=10, pady=1, columnspan=2)
+        update_stopwatch()  # Start updating the stopwatch label
+
     def quiz_progress(self):
-        global score  #Makes the score global (I don't know what that means)
-        ttl_scr = self.total_score  #assigns ttl_scr to self.total_score
-        choice = self.variable1.get()  #assigns choice to self.variable1.get()
-        if len(asked) > 9:  #What's a "len"?
+        global score
+        ttl_scr = self.total_score  # Reference to the total score label
+        choice = self.variable1.get()  # Get the selected answer
+        if len(asked) > 9:
+
             if choice == answer_list[qnum][6]:
                 score += 1
                 ttl_scr.configure(text=score)
@@ -164,22 +170,23 @@ class Questions_Menu:
                                       answer_list[qnum][5])
                     self.confirm_button.config(text="confirm")
                     self.quiz_setup()
-        #There's so much code here it hurts my head trying to understand what it does
-    def quiz_setup(self):  #sets up quiz i think????
+
+    def quiz_setup(self):  # Sets up the next question
         randomiser()
-        self.variable1.set(
-            0
-        )  #Again with the variable1- what does this do? And why is it being set? And what does it mean to be set?
+        self.variable1.set(0)  # Reset the selected answer
         self.questlabel.config(text=answer_list[qnum][0])
         self.radiobutton1.config(text=answer_list[qnum][1])
         self.radiobutton2.config(text=answer_list[qnum][2])
         self.radiobutton3.config(text=answer_list[qnum][3])
         self.radiobutton4.config(text=answer_list[qnum][4])
-    def quit_window(self):  #Destroys the quiz window
+
+    def quit_window(self):  # Destroys the quiz window
         root.destroy()
         Quit()
+
+
 class Quit:
-    #Defines the appearance of the quit window
+    # Defines the appearance of the quit window
     def __init__(self):
         global start_time
         background = "DarkGreen"
@@ -190,21 +197,21 @@ class Quit:
                                 height=1000,
                                 bg=background)
         self.quit_frame.grid()
-        #Quit Heading
+        # Quit Heading
         quit_heading = Label(self.quit_frame,
                              text="Huzzah, you made it to the end!",
                              font=("Helvetica", "19", "bold"),
                              bg=background)
         quit_heading.grid(row=0)
-        #Stopwatch time label
+        # Stopwatch time label
         end_time = time() - start_time
-        time_elapsed = strftime('%H:%M:%S', time.gmtime(end_time))
+        time_elapsed = strftime('%H:%M:%S', gmtime(end_time))
         time_label = Label(self.quit_frame,
                            text=f"Time: {time_elapsed}",
                            font=("Helvetica", "12"),
                            bg=background)
         time_label.grid(row=1)
-        #Quit button
+        # Quit button
         quit_button = Button(self.quit_frame,
                              text='Quit',
                              width=10,
@@ -212,24 +219,30 @@ class Quit:
                              font="Helvetica",
                              command=self.end_program)
         quit_button.grid(row=4, pady=20)
-    #Defines the end program function
+
+    # Defines the end program function
     def end_program(self):
-        self.quit_box.destroy()  #Destroys the quit box
+        self.quit_box.destroy()  # Destroys the quit box
+
+
 def randomiser():
     global qnum
     qnum = random.randint(1, 50)
     if qnum not in asked:
         asked.append(qnum)
-    elif qnum in asked:
+    else:
         randomiser()
-def update_stopwatch(self):
+
+
+def update_stopwatch():
     global start_time, stopwatch_label
     elapsed_time = time() - start_time
-    formatted_time = strftime('%H:%M:%S', time.gmtime(elapsed_time))
+    formatted_time = strftime('%H:%M:%S', gmtime(elapsed_time))
     stopwatch_label.config(text=formatted_time)
-    stopwatch_label.after(1000, self.update_stopwatch)
-#Why is this here
-randomiser()
+    stopwatch_label.after(1000, update_stopwatch)
+
+
+randomiser()  # Initialize the first question
 #Dictionary that holds all possible questions and answers
 answer_list = {
     1: [
