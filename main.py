@@ -219,7 +219,8 @@ class Quit:
                                 bg=background)
             score_label.grid(row=2)
             with open("high_scores.txt", "a") as file:
-                file.write(f"{names_list[-1]} - {score}\n")
+                file.write(f"{names_list[-1]} - {score} - {end_time}\n")
+                
         # Quit button
         quit_button = Button(self.quit_frame,
                              text='Quit',
